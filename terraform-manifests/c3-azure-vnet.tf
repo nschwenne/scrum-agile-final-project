@@ -1,31 +1,54 @@
-resource "azurerm_resource_group" "arm_rg" {
-  name = var.resource_group_name
-  location = var.resource_group_location
+resource "azurerm_resource_group" "windows_resource_group" {
+  name     = "windows-rg"
+  location = "centralus"
 }
 
-resource "azurerm_virtual_network" "client_wordpress" {
-  name = var.virtual_network_name
-  location = var.resource_group_location
-  resource_group_name = azurerm_resource_group.arm_rg.name
-  address_space = [ "10.0.0.0/16" ]
+resource "azurerm_virtual_network" "windows_virtual_network" {
+  name                = "windows-network"
+  address_space       = ["10.0.0.0/16"]
+  location            = azurerm_resource_group.windows_resource_group.location
+  resource_group_name = azurerm_resource_group.windows_resource_group.name
 }
 
-resource "azurerm_subnet" "client_subnet" {
-  name = "${var.virtual_network_name}_client_subnet"
-  resource_group_name = azurerm_resource_group.arm_rg.name
-  virtual_network_name = azurerm_virtual_network.client_wordpress.name
-  address_prefixes = [ "10.0.1.0/24" ]
+resource "azurerm_subnet" "windows_azurerm_subnet" {
+  name                 = "internal"
+  resource_group_name  = azurerm_resource_group.windows_resource_group.name
+  virtual_network_name = azurerm_virtual_network.windows_virtual_network.name
+  address_prefixes     = ["10.0.2.0/24"]
 }
 
-resource "azurerm_network_interface" "client_nic" {
-  name = "${azurerm_virtual_network.client_wordpress.name}_client_nic"
-  location = var.resource_group_location
-  resource_group_name = var.resource_group_name
-  
+resource "azurerm_network_interface" "windows_network_interface" {
+  name                = "windows-nic"
+  location            = azurerm_resource_group.windows_virtual_network.location
+  resource_group_name = azurerm_resource_group.windows_virtual_network.name
+
   ip_configuration {
-    name = "internal"
-    subnet_id = azurerm_subnet.client_subnet.id
+    name                          = "internal"
+    subnet_id                     = azurerm_subnet.windows_azurerm_subnet.id
     private_ip_address_allocation = "Dynamic"
-    
+  }
+}
+
+resource "azurerm_windows_virtual_machine" "example" {
+  name                = "example-machine"
+  resource_group_name = azurerm_resource_group.windows_resource_group.name
+  location            = azurerm_resource_group.windows_resource_group.location
+  size                = "Standard_DC2s_v2"
+  admin_username      = "adminuser"
+  admin_password      = "j0hnth3f1sh3rman"
+  network_interface_ids = [
+    azurerm_network_interface.example.id,
+  ]
+
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
+
+  source_image_reference {
+    publisher = "MicrosoftWindowsServer"
+    offer     = "WindowsServer"
+    sku       = "2016-Datacenter"
+    version   = "latest"
   }
 }
