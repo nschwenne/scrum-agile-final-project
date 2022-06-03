@@ -61,5 +61,5 @@ Github Repo: [liuvis05](https://github.com/liuvis05).
 [yaimara.r.nar@gmail.com](mailto:yaimara.r.nar@gmail.com)
 Github Repo: [YaimaraNarito](https://github.com/YaimaraNarito).
 
-[lexington.Johnson@icloud.com](mailto:lexington.johnson@icloud.com)
-Github Repo: [Notgnixel](https://github.com/Notgnixel).
+[M.Andreas.Wall@proton.me](mailto:M.Andreas.Wall@proton.me)
+Github Repo: [Andreas-Wall](https://github.com/Andreas-Wall).
