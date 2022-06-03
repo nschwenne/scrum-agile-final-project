@@ -3,8 +3,8 @@ resource "azurerm_mysql_server" "mysql_server" {
   location            = var.resource_group_name
   resource_group_name = var.resource_group_location
 
-  administrator_login          = var.mysql_db_username
-  administrator_login_password = var.mysql_db_password
+  administrator_login          = "dbadmin"
+  administrator_login_password = "4567secretPASS"
 
   sku_name   = "GP_Gen5_2"
   storage_mb = 5120
@@ -21,7 +21,7 @@ resource "azurerm_mysql_server" "mysql_server" {
 }
 
 resource "azurerm_mysql_database" "wordpress_db" {
-  name                = var.mysql_db_schema
+  name                = "wordpress_db"
   resource_group_name = var.resource_group_name
   server_name         = azurerm_mysql_server.mysql_server.name
   charset             = "utf8"
