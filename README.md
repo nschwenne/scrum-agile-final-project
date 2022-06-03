@@ -2,7 +2,7 @@
 
 
 ## REQUIRED:
-- You will need a terraform.tfvars with the following information
+- You will need a terraform.tfvars within the `terraform-manifests` directory with the following information
 ```
 azure_subscription_id = "<YOUR AZURE SUBSCRIPTION ID"
 ```
