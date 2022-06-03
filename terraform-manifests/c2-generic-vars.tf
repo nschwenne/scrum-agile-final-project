@@ -1,6 +1,5 @@
 # Generic Variables for Terraform Provisioning
 
-
 variable "resource_group_name" {
   description = "Resource Group Name"
   type = string
