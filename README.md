@@ -58,8 +58,8 @@ Github Repo: [davidschepis](https://github.com/davidschepis).
 [ha.cki@hotmail.es](mailto:ha.cki@hotmail.es)
 Github Repo: [liuvis05](https://github.com/liuvis05).
 
-[yaimara.r.nar@gmail.com](mailto:yaimara.r.nar@gmail.com)
-Github Repo: [YaimaraNarito](https://github.com/YaimaraNarito).
+[nschwenne@gmail.com](mailto:nschwenne@gmail.com)
+Github Repo: [Nschwenne](https://github.com/Nschwenne).
 
 [M.Andreas.Wall@proton.me](mailto:M.Andreas.Wall@proton.me)
 Github Repo: [Andreas-Wall](https://github.com/Andreas-Wall).
