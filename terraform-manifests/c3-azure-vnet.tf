@@ -15,6 +15,7 @@ resource "azurerm_subnet" "windows_azurerm_subnet" {
   resource_group_name  = azurerm_resource_group.windows_resource_group.name
   virtual_network_name = azurerm_virtual_network.windows_virtual_network.name
   address_prefixes     = ["10.0.2.0/24"]
+  service_endpoints = [ "Microsoft.Sql" ]
 }
 
 resource "azurerm_network_interface" "windows_network_interface" {
@@ -56,9 +57,9 @@ resource "azurerm_windows_virtual_machine" "example" {
   name                = "example-machine"
   resource_group_name = azurerm_resource_group.windows_resource_group.name
   location            = azurerm_resource_group.windows_resource_group.location
-  size                = "Standard_A0"
+  size                = "Standard_B1s"
   admin_username      = "adminuser"
-  admin_password      = "j0hnth3f1sh3rman"
+  admin_password      = "J0hnth3f1sh3rman"
   network_interface_ids = [
     azurerm_network_interface.windows_network_interface.id
   ]
@@ -69,9 +70,9 @@ resource "azurerm_windows_virtual_machine" "example" {
   }
 
   source_image_reference {
-    publisher = "MicrosoftWindowsServer"
-    offer     = "WindowsServer"
-    sku       = "2016-Datacenter"
+    publisher = "MicrosoftWindowsDesktop"
+    offer     = "Windows-10"
+    sku       = "20h1-pro"
     version   = "latest"
   }
 }
