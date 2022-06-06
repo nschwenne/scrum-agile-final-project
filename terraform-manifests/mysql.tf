@@ -1,5 +1,5 @@
 resource "azurerm_mysql_server" "mysql_server" {
-  name                = "msql_server"
+  name                = "msqlserver"
   location            = var.resource_group_name
   resource_group_name = var.resource_group_location
 
@@ -37,10 +37,10 @@ resource "azurerm_mysql_database" "wordpress_db" {
 # }
 
 resource "azurerm_mysql_virtual_network_rule" "mysql_virtual_network_rule" {
-  name                = "mysql_vnet_rule"
+  name                = "mysql-vnet-rule"
   resource_group_name = var.resource_group_name
   server_name         = azurerm_mysql_server.mysql_server.name
-  subnet_id           = azurerm_subnet.internal.id
+  subnet_id           = azurerm_subnet.windows_azurerm_subnet.id
 }
 
 output "mysql_server_fqdn" {
