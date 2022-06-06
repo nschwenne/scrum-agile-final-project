@@ -40,7 +40,7 @@ resource "azurerm_mysql_virtual_network_rule" "mysql_virtual_network_rule" {
   name                = "mysql_vnet_rule"
   resource_group_name = var.resource_group_name
   server_name         = azurerm_mysql_server.mysql_server.name
-  subnet_id           = azurerm_subnet.websubnet.id
+  subnet_id           = azurerm_subnet.internal.id
 }
 
 output "mysql_server_fqdn" {
