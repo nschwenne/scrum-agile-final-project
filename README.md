@@ -1,7 +1,8 @@
 # scrum-agile-final-project
 
 ## Description
-Project utilizes AKS to host a docker container with a node.js application
+Hand-on practice coordinating an Agile project using Scrum practices. Deploys a wordpress site on an Azure virtual machine. Using Terraform for infrastructure provisioning,
+Github as a code repo, Azure MySQL as a database, Azure Storage Account for file storage, and Azure Load Balancer to expose services.
 
 ## Table of Contents
 
@@ -9,7 +10,6 @@ Project utilizes AKS to host a docker container with a node.js application
 - [Installation](#installation)
 - [Usage](#usage)
 - [Screenshots](#screenshots)
-- [Testing](#testing)
 - [License](#license)
 - [Contributors](#contributors)
 
@@ -23,10 +23,8 @@ To install necessary dependencies, run the following command:
 ```
 Please install the Azure CLI and Kubectl
 https://docs.microsoft.com/en-us/cli/azure/
-https://kubernetes.io/docs/tasks/tools/
 
-As well as Docker and Terraform
-https://docs.docker.com/get-docker/
+As well as Terraform
 https://www.terraform.io/downloads
 ```
 
@@ -41,11 +39,17 @@ https://www.terraform.io/downloads
  var.azure_subscription_id
  ```
 
+ Copy terraform-manifests folder into local directory
+ Run these commands:
+ ```
+ cd terraform-manifests
+ terraform init
+ terraform validate
+ terraform plan -out tfplan.out
+ terraform apply tfplan.out
+ ```
+
  ## Screenshots
-
-
- ## Testing
-
 
  ## License
 This project is not licensed
