@@ -32,7 +32,7 @@ resource "azurerm_network_interface" "windows_network_interface" {
 resource "azurerm_public_ip" "public_ip" {
   name                = "publicip"
   location            = "centralus"
-  resource_group_name =  "windows-rg"
+  resource_group_name = azurerm_resource_group.windows_resource_group.name
   allocation_method   = "Static"
   sku = "Standard"
 }
@@ -41,7 +41,7 @@ resource "azurerm_public_ip" "public_ip" {
 resource "azurerm_lb" "project_load_balancer" {
   name                = "projectlb"
   location            = "centralus"
-  resource_group_name =  "windows-rg"
+  resource_group_name = azurerm_resource_group.windows_resource_group.name
   sku = "Standard"
   frontend_ip_configuration {
     name                 = "load-balancer-publicip"
@@ -56,7 +56,7 @@ resource "azurerm_windows_virtual_machine" "example" {
   name                = "example-machine"
   resource_group_name = azurerm_resource_group.windows_resource_group.name
   location            = azurerm_resource_group.windows_resource_group.location
-  size                = "Standard_DC2s_v2"
+  size                = "Standard_A0"
   admin_username      = "adminuser"
   admin_password      = "j0hnth3f1sh3rman"
   network_interface_ids = [
