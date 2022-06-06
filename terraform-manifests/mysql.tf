@@ -1,7 +1,7 @@
 resource "azurerm_mysql_server" "mysql_server" {
   name                = "msqlserver"
-  location            = var.resource_group_location
-  resource_group_name = var.resource_group_name
+  location            = "centralus"
+  resource_group_name = "windows-rg"
 
   administrator_login          = "dbadmin"
   administrator_login_password = "4567secretPASS"
@@ -22,7 +22,7 @@ resource "azurerm_mysql_server" "mysql_server" {
 
 resource "azurerm_mysql_database" "wordpress_db" {
   name                = "wordpress_db"
-  resource_group_name = var.resource_group_name
+  resource_group_name = "windows-rg"
   server_name         = azurerm_mysql_server.mysql_server.name
   charset             = "utf8"
   collation           = "utf8_unicode_ci"
@@ -30,7 +30,7 @@ resource "azurerm_mysql_database" "wordpress_db" {
 
 # resource "azurerm_mysql_firewall_rule" "mysql_firewall" {
 #   name                = "allow-access-from-bastionhost-publicip"
-#   resource_group_name = var.resource_group_name
+#   resource_group_name = "windows-rg"
 #   server_name         = azurerm_mysql_server.mysql_server.name
 #   start_ip_address    = azurerm_public_ip.bastion_host_publicip.ip_address
 #   end_ip_address      = azurerm_public_ip.bastion_host_publicip.ip_address
@@ -38,7 +38,7 @@ resource "azurerm_mysql_database" "wordpress_db" {
 
 resource "azurerm_mysql_virtual_network_rule" "mysql_virtual_network_rule" {
   name                = "mysql-vnet-rule"
-  resource_group_name = var.resource_group_name
+  resource_group_name = "windows-rg"
   server_name         = azurerm_mysql_server.mysql_server.name
   subnet_id           = azurerm_subnet.windows_azurerm_subnet.id
 }
