@@ -15,7 +15,7 @@ resource "azurerm_subnet" "windows_azurerm_subnet" {
   resource_group_name  = azurerm_resource_group.windows_resource_group.name
   virtual_network_name = azurerm_virtual_network.windows_virtual_network.name
   address_prefixes     = ["10.0.2.0/24"]
-  service_endpoints = [ "Microsoft.Sql" ]
+  service_endpoints    = ["Microsoft.Sql"]
 }
 
 resource "azurerm_network_interface" "windows_network_interface" {
@@ -30,12 +30,32 @@ resource "azurerm_network_interface" "windows_network_interface" {
   }
 }
 
+# Azure LB Inbound NAT Rule
+resource "azurerm_lb_nat_rule" "web_lb_inbound_nat_rule_3389" {
+  depends_on                     = [azurerm_windows_virtual_machine.example-machine]
+  name                           = "lb-inbound-rule"
+  protocol                       = "Tcp"
+  frontend_port                  = 3389
+  backend_port                   = 3389
+  frontend_ip_configuration_name = azurerm_lb.project_load_balancer.frontend_ip_configuration.name
+  resource_group_name            = azurerm_resource_group.windows-rg.name
+  loadbalancer_id                = azurerm_lb.project_load_balancer.id
+}
+
+# Associate LB NAT Rule and VM Network Interface
+resource "azurerm_network_interface_nat_rule_association" "web_nic_nat_rule_associate" {
+  network_interface_id  = azurerm_network_interface.windows_network_interface.id
+  ip_configuration_name = azurerm_network_interface.windows_network_interface.ip_configuration.name
+  nat_rule_id           = azurerm_lb_nat_rule.web_lb_inbound_nat_rule_3389.id
+}
+
+
 resource "azurerm_public_ip" "public_ip" {
   name                = "publicip"
   location            = "centralus"
   resource_group_name = azurerm_resource_group.windows_resource_group.name
   allocation_method   = "Static"
-  sku = "Standard"
+  sku                 = "Standard"
 }
 
 
@@ -43,7 +63,7 @@ resource "azurerm_lb" "project_load_balancer" {
   name                = "projectlb"
   location            = "centralus"
   resource_group_name = azurerm_resource_group.windows_resource_group.name
-  sku = "Standard"
+  sku                 = "Standard"
   frontend_ip_configuration {
     name                 = "load-balancer-publicip"
     public_ip_address_id = azurerm_public_ip.public_ip.id
@@ -85,29 +105,29 @@ resource "azurerm_network_security_group" "wp_subnet_nsg" {
 
 
 resource "azurerm_subnet_network_security_group_association" "wordpress_nsg_associate" {
-  depends_on = [ azurerm_network_security_rule.wordpress_nsg_ingress_rules]
+  depends_on                = [azurerm_network_security_rule.wordpress_nsg_ingress_rules]
   subnet_id                 = azurerm_subnet.windows_azurerm_subnet.id
   network_security_group_id = azurerm_network_security_group.wp_subnet_nsg.id
 }
 
 locals {
   web_inbound_ports_map = {
-    "100" : "80", 
+    "100" : "80",
     "110" : "443",
     "120" : "22",
     "130" : 3306 # MySQL Connection
-  } 
+  }
 }
 
 resource "azurerm_network_security_rule" "wordpress_nsg_ingress_rules" {
-  for_each = local.web_inbound_ports_map
+  for_each                    = local.web_inbound_ports_map
   name                        = "Rule-Port-${each.value}"
   priority                    = each.key
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "Tcp"
   source_port_range           = "*"
-  destination_port_range      = each.value 
+  destination_port_range      = each.value
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
   resource_group_name         = azurerm_resource_group.windows_resource_group.name
