@@ -35,8 +35,8 @@ resource "azurerm_lb_nat_rule" "web_lb_inbound_nat_rule_3389" {
   depends_on                     = [azurerm_linux_virtual_machine.example]
   name                           = "lb-inbound-rule"
   protocol                       = "Tcp"
-  frontend_port                  = 3389
-  backend_port                   = 3389
+  frontend_port                  = 2222
+  backend_port                   = 22
   frontend_ip_configuration_name = azurerm_lb.project_load_balancer.frontend_ip_configuration[0].name
   resource_group_name            = azurerm_resource_group.windows_resource_group.name
   loadbalancer_id                = azurerm_lb.project_load_balancer.id
