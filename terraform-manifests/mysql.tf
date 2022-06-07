@@ -1,5 +1,5 @@
 resource "azurerm_mysql_server" "mysql_server" {
-  name                = "mpnsawdsmsqlserver"
+  name                = "mpnsawdsmsqlserver2"
   location            = "centralus"
   resource_group_name = azurerm_resource_group.windows_resource_group.name
 
@@ -16,7 +16,7 @@ resource "azurerm_mysql_server" "mysql_server" {
   infrastructure_encryption_enabled = false
   public_network_access_enabled     = true
   ssl_enforcement_enabled           = false
-  ssl_minimal_tls_version_enforced  = "TLSEnforcementDisabled" 
+  ssl_minimal_tls_version_enforced  = "TLSEnforcementDisabled"
 
 }
 
@@ -45,5 +45,5 @@ resource "azurerm_mysql_virtual_network_rule" "mysql_virtual_network_rule" {
 
 output "mysql_server_fqdn" {
   description = "MySQL Server FQDN"
-  value = azurerm_mysql_server.mysql_server.fqdn
+  value       = azurerm_mysql_server.mysql_server.fqdn
 }

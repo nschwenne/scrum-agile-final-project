@@ -32,7 +32,7 @@ resource "azurerm_network_interface" "windows_network_interface" {
 
 # Azure LB Inbound NAT Rule
 resource "azurerm_lb_nat_rule" "web_lb_inbound_nat_rule_3389" {
-  depends_on                     = [azurerm_windows_virtual_machine.example]
+  depends_on                     = [azurerm_linux_virtual_machine.example]
   name                           = "lb-inbound-rule"
   protocol                       = "Tcp"
   frontend_port                  = 3389
@@ -70,19 +70,25 @@ resource "azurerm_lb" "project_load_balancer" {
   }
 }
 
-resource "azurerm_windows_virtual_machine" "example" {
+resource "azurerm_linux_virtual_machine" "example" {
   depends_on = [
     azurerm_network_interface.windows_network_interface
   ]
   name                = "example-machine"
   resource_group_name = azurerm_resource_group.windows_resource_group.name
   location            = azurerm_resource_group.windows_resource_group.location
-  size                = "Standard_B1s"
+  size                = "Standard_D2s_v3"
   admin_username      = "adminuser"
   admin_password      = "J0hnth3f1sh3rman"
   network_interface_ids = [
     azurerm_network_interface.windows_network_interface.id
   ]
+
+  admin_ssh_key {
+    username   = "adminuser"
+    public_key = file("${path.module}/ssh-keys/key.pub")
+  }
+
 
   os_disk {
     caching              = "ReadWrite"
@@ -90,9 +96,9 @@ resource "azurerm_windows_virtual_machine" "example" {
   }
 
   source_image_reference {
-    publisher = "MicrosoftWindowsDesktop"
-    offer     = "Windows-10"
-    sku       = "20h1-pro"
+    publisher = "Canonical"
+    offer     = "UbuntuServer"
+    sku       = "18.04-LTS"
     version   = "latest"
   }
 }
