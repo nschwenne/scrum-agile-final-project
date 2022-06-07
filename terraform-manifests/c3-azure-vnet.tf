@@ -115,7 +115,7 @@ locals {
     "100" : "80",
     "110" : "443",
     "120" : "22",
-    "130" : 3306 # MySQL Connection
+    "130" : "3306"
   }
 }
 
@@ -132,4 +132,9 @@ resource "azurerm_network_security_rule" "wordpress_nsg_ingress_rules" {
   destination_address_prefix  = "*"
   resource_group_name         = azurerm_resource_group.windows_resource_group.name
   network_security_group_name = azurerm_network_security_group.wp_subnet_nsg.name
+}
+
+resource "azurerm_lb_backend_address_pool" "web_lb_backend_address_pool" {
+  name            = "win-lb-backend"
+  loadbalancer_id = azurerm_lb.project_load_balancer.id
 }
