@@ -5,15 +5,11 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "3.9.0"
     }
-    random = {
-      source  = "hashicorp/random"
-      version = ">= 3.0"
-    }
   }
 }
 
 
 provider "azurerm" {
   features {}
-  subscription_id = var.azure_subscription_id
+  # subscription_id = var.azure_subscription_id
 }
