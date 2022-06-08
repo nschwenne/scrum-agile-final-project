@@ -59,8 +59,8 @@ This project is not licensed
 [davids.developer@outlook.com](mailto:davids.developer@outlook.com)
 Github Repo: [davidschepis](https://github.com/davidschepis).
 
-[ha.cki@hotmail.es](mailto:ha.cki@hotmail.es)
-Github Repo: [liuvis05](https://github.com/liuvis05).
+[mike@phelpsweb.dev](mailto:mike@phelpsweb.dev)
+Github Repo: [mphelps1978](https://github.com/mphelps1978).
 
 [nschwenne@gmail.com](mailto:nschwenne@gmail.com)
 Github Repo: [Nschwenne](https://github.com/Nschwenne).
