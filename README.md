@@ -7,6 +7,7 @@ Github as a code repo, Azure MySQL as a database, Azure Storage Account for file
 Website hosted at "LoadBalancerPublicIP"
 
 Example: 52.173.167.213
+
          52.173.167.213/wordpress
 
 ## Table of Contents
