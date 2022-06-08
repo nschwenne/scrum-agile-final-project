@@ -4,8 +4,10 @@
 Hand-on practice coordinating an Agile project using Scrum practices. Deploys a wordpress site on an Azure virtual machine. Using Terraform for infrastructure provisioning,
 Github as a code repo, Azure MySQL as a database, Azure Storage Account for file storage, and Azure Load Balancer to expose services.
 
-Website hosted at <PublicIP>/wordpress
-Example: 52.173.167.213/wordpress
+Website hosted at "LoadBalancerPublicIP"
+
+Example: 52.173.167.213
+         52.173.167.213/wordpress
 
 ## Table of Contents
 
