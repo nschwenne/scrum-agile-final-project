@@ -21,7 +21,7 @@ https://github.com/nschwenne/scrum-agile-final-project
 To install necessary dependencies, run the following command:
 
 ```
-Please install the Azure CLI and Kubectl
+Please install the Azure CLI
 https://docs.microsoft.com/en-us/cli/azure/
 
 As well as Terraform
@@ -49,7 +49,12 @@ https://www.terraform.io/downloads
  terraform apply tfplan.out
  ```
 
+ ```
+ mysql --host=mpnsawdsmsqlserver5.mysql.database.azure.com --user=dbadmin --password=4567secretPASS
+ ```
+
  ## Screenshots
+ ![Wordpress Screenshot](screenshots/wordpress_screenshot.png)
 
  ## License
 This project is not licensed
