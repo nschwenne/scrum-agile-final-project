@@ -55,7 +55,7 @@ https://www.terraform.io/downloads
 
  ## Screenshots
  ![Wordpress Screenshot](screenshots/wordpress_screenshot.png)
- ![JIRA Roadmap Screenshot](![Screen Shot 2022-06-08 at 10 17 02 AM](https://user-images.githubusercontent.com/83676675/172688520-c49a3ed6-3917-42b0-81ec-2723eec2baeb.png)
+ ![JIRA Roadmap Screenshot]![Screen Shot 2022-06-08 at 10 17 02 AM](https://user-images.githubusercontent.com/83676675/172688520-c49a3ed6-3917-42b0-81ec-2723eec2baeb.png)
 
 
  ## License
